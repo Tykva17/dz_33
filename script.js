@@ -1,85 +1,44 @@
 class Hamburger {
-    constructor(size, hamType){
+    constructor(size, hamType , topping = 'none'){
         this.size = size;
         this.hamType = hamType;
-        this.price = this.calcPrice();
-        this.kKall = this.calckKall();
-        this.topping = 'none';
+        this.price = 0;
+        this.kKall = 0;
+        this.topping = topping;
     }
     calcPrice (){
         let fullPrice = 0;
-        {
-            if(this.size == 'small'){
-                fullPrice += 50;
-            }else if(this.size == 'big'){
-                fullPrice += 100;
-            }
-
-            if(this.hamType == 'cheeze'){
-                fullPrice += 10;
-            }else if(this.hamType == 'salat'){
-                fullPrice += 20;
-            }else if(this.hamType == 'potato'){
-                fullPrice += 15;
-            }
-
-            if(this.hamType == 'none'){
-                fullPrice += 0;
-            }else if(this.hamType == 'mayo'){
-                fullPrice += 20;
-            }else if(this.hamType == 'condiment'){
-                fullPrice += 15;
-            }
-        }
+        let sizePrice = (this.size == 'small') ? 50 : (this.size == 'big') ? 100 : 0;
+        let typePrice = (this.hamType == 'cheeze') ? 10 : (this.hamType == 'salat') ? 20 : (this.hamType == 'salat') ? 15 : 0;
+        let toppingPrice = (this.topping == 'mayo') ? 20 : (this.topping == 'condiment') ? 15 : (this.topping == 'none') ? 0 : 0;
+        fullPrice = sizePrice + typePrice + toppingPrice;
         return this.price = fullPrice;
     }
     calckKall (){
         let fullkKall = 0;
-        {
-            if(this.size == 'small'){
-                fullkKall += 20;
-            }else if(this.size == 'big'){
-                fullkKall += 40;
-            }
-
-            if(this.hamType == 'cheeze'){
-                fullkKall += 20;
-            }else if(this.hamType == 'salat'){
-                fullkKall += 5;
-            }else if(this.hamType == 'potato'){
-                fullkKall += 10;
-            }
-
-            if(this.hamType == 'none' || this.hamType == 'condiment'){
-                fullkKall += 0;
-            }else if(this.hamType == 'mayo'){
-                fullkKall += 5;
-            }
-        }
+        let sizekKall = (this.size == 'small') ? 20 : (this.size == 'big') ? 40 : 0;
+        let typekKall = (this.hamType == 'cheeze') ? 20 : (this.hamType == 'salat') ? 5 : (this.hamType == 'potato') ? 10 : 0;
+        let toppingkKall = (this.topping == 'mayo') ? 5 : (this.topping == 'condiment' || this.topping == 'none') ? 0 : 0;
+        fullkKall = sizekKall + typekKall + toppingkKall;
         return this.kKall = fullkKall;
     }
     changeHamType(newHamType){
         this.hamType = newHamType;
-        this.calckKall()
-        this.calcPrice()
-        return this.hamType;
     }
     addTopping(newTopping){
         this.topping = newTopping;
-        this.calckKall()
-        this.calcPrice()
-        return this.topping;
     }
-
 }
-
 
 const hamb1 = new Hamburger('small','cheeze');
 console.log(hamb1);
-console.log("Price: " + hamb1.calcPrice())
-console.log("Calories: " + hamb1.calckKall())
-console.log(hamb1.changeHamType('salat'))
-console.log("Price: " + hamb1.calcPrice())
+console.log("Price: " + hamb1.calcPrice());
+console.log("Calories: " + hamb1.calckKall());
+console.log('change hamberger type' , hamb1.changeHamType('salat'));
+console.log("Price: " + hamb1.calcPrice());
 console.log(hamb1);
-console.log(hamb1.addTopping('mayo'));
+console.log('add mayo to hamberger' , hamb1.addTopping('mayo'));
+console.log(hamb1);
+console.log("New price: " + hamb1.calcPrice());
+console.log("New Calories: " + hamb1.calckKall());
 console.log(hamb1);
